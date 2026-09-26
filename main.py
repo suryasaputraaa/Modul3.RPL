@@ -1,7 +1,15 @@
-print("=== Kalkulator Terminal Modul 3 ===")
-angka1 = float(input("Masukkan angka pertama: "))
-angka2 = float(input("Masukkan angka kedua: "))
-hasil = angka1 + angka2
+print("=== PROGRAM BIODATA MAHASISWA ===")
 
-print(f"Status: Setup Berhasil!")
-print(f"Hasil Penjumlahan: {hasil}")
+nama = input("Masukkan Nama          : ")
+nim = input("Masukkan NIM           : ")
+kelas = input("Masukkan Kelas         : ")
+prodi = input("Masukkan Program Studi : ")
+
+print("\n=== DATA MAHASISWA ===")
+print("Nama          :", nama)
+print("NIM           :", nim)
+print("Kelas         :", kelas)
+print("Program Studi :", prodi)
+
+print("\nData berhasil disimpan!")
+
