@@ -1,11 +1,11 @@
-from buku_model import BukuModel
+from models.buku_model import bukumodel
 
-model = BukuModel()
+model = bukumodel()
 
 # 1. Menguji fungsi Create (menambah buku baru)
-print("Menambahkan data buku...")
-model.create_buku("Pemrograman Python MVC", "Guido van Rossum", 2023)
-print("Data berhasil disimpan ke Laragon MySQL!")
+# print("Menambahkan data buku...")
+# model.create_buku("Pemrograman Python MVC", "Guido van Rossum", 2023)
+# print("Data berhasil disimpan ke Laragon MySQL!")
 
 # 2. Menguji fungsi Read (menampilkan data)
 print("\n=== Daftar Buku ===")
