@@ -2,21 +2,39 @@ from unittest.mock import MagicMock
 from models.buku_model import bukumodel
 
 
-def test_create_buku_berhasil():
+def test_get_all_buku_berhasil():
     # Menginisialisasi Model
     model = bukumodel()
 
-    # Memanipulasi (Mock) koneksi database agar tidak mengotori data asli
+    # Membuat Mock untuk koneksi database
     model.conn = MagicMock()
+
+    # Membuat Mock untuk cursor
     mock_cursor = MagicMock()
     model.conn.cursor.return_value = mock_cursor
 
-    # Melakukan eksekusi fungsi
-    hasil = model.create_buku("Buku Testing", "Penulis QA", 2026)
+    # Menentukan data buku palsu yang akan dikembalikan
+    data_buku = [
+        {
+            "id_buku": 1,
+            "judul": "Buku Testing",
+            "penulis": "Penulis QA",
+            "tahun_terbit": 2026
+        }
+    ]
 
-    # Memverifikasi apakah fungsi mengembalikan nilai True
-    assert hasil is True
-    # Memverifikasi apakah cursor.execute benar-benar dipanggil
-    mock_cursor.execute.assert_called_once()
-    # Memverifikasi apakah perintah transaksi (simpan) dipanggil
-    model.conn.commit.assert_called_once()
+    mock_cursor.fetchall.return_value = data_buku
+
+    # Menjalankan fungsi get_all_buku()
+    hasil = model.get_all_buku()
+
+    # Memastikan hasil sesuai dengan data yang diharapkan
+    assert hasil == data_buku
+
+    # Memastikan query SQL dijalankan
+    mock_cursor.execute.assert_called_once_with(
+        "SELECT * FROM buku"
+    )
+
+    # Memastikan cursor ditutup setelah digunakan
+    mock_cursor.close.assert_called_once()
