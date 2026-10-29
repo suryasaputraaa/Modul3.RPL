@@ -33,7 +33,7 @@ def test_get_all_buku_berhasil():
 
     # Memastikan query SQL dijalankan
     mock_cursor.execute.assert_called_once_with(
-        "SELECT * FROM buku"
+        "SELECT * FROM buku ORDER BY id_buku ASC"
     )
 
     # Memastikan cursor ditutup setelah digunakan
