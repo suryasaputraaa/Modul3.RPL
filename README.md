@@ -9,22 +9,38 @@ melalui **CI/CD dengan GitHub Actions**.
 ## Struktur Direktori
 
 ```
+Aplikasi ini menerapkan arsitektur MVC (Model-View-Controller):
+
 Modul3.RPL/
 ├── .github/
 │   └── workflows/
-│       └── ci_pipeline.yml   # Konfigurasi CI (flake8 + pytest)
-├── config/                   # Konfigurasi koneksi database
-├── models/                   # Model: logika data & akses database
-├── views/                    # View: tampilan antarmuka (CustomTkinter)
-├── controllers/              # Controller: penghubung model dan view
-├── tests/                    # Unit test (pytest)
-│   ├── test_auth.py
-│   └── test_buku.py
-├── MODULNYA/                 # Berkas modul praktikum
-├── buat_akun.py              # Skrip pembuatan akun pengguna
-├── cek_password.py           # Skrip pengecekan password
-├── main.py                   # Titik masuk aplikasi
-├── requirements.txt          # Daftar dependensi
+│       └── ci_pipeline.yml      # Konfigurasi CI (flake8 + pytest)
+├── config/
+│   └── database.py              # Konfigurasi & koneksi ke MySQL
+├── models/                      # MODEL: logika data & akses database
+│   ├── anggota_model.py         # Data anggota perpustakaan
+│   ├── buku_model.py            # Data buku
+│   └── user_model.py            # Data pengguna & autentikasi
+├── views/                       # VIEW: tampilan antarmuka (CustomTkinter)
+│   ├── anggota_view.py          # Halaman anggota
+│   ├── buku_view.py             # Halaman buku
+│   └── login_view.py            # Halaman login
+├── controllers/                 # CONTROLLER: penghubung model dan view
+│   ├── anggota_controller.py    # Logika pengelolaan anggota
+│   ├── auth_controller.py       # Logika autentikasi
+│   ├── buku_controller.py       # Logika pengelolaan buku
+│   └── login_controller.py      # Logika proses login
+├── tests/                       # Unit test (pytest)
+│   ├── test_auth.py             # Test hashing & autentikasi
+│   └── test_buku.py             # Test pengambilan data buku
+├── MODULNYA/                    # Berkas modul praktikum
+├── buat_akun.py                 # Skrip pembuatan akun pengguna
+├── cek_password.py              # Skrip pengecekan password
+├── test_anggota.py              # Skrip uji coba fitur anggota
+├── test_model.py                # Skrip uji coba model
+├── main.py                      # Titik masuk aplikasi
+├── requirements.txt             # Daftar dependensi
+├── .gitignore
 └── README.md
 ```
 
