@@ -33,7 +33,6 @@ Modul3.RPL/
 ├── tests/                       # Unit test (pytest)
 │   ├── test_auth.py             # Test hashing & autentikasi
 │   └── test_buku.py             # Test pengambilan data buku
-├── MODULNYA/                    # Berkas modul praktikum
 ├── buat_akun.py                 # Skrip pembuatan akun pengguna
 ├── cek_password.py              # Skrip pengecekan password
 ├── test_anggota.py              # Skrip uji coba fitur anggota
