@@ -1,0 +1,108 @@
+# Sistem Perpustakaan
+
+Aplikasi desktop manajemen perpustakaan berbasis Python dengan arsitektur
+**MVC (Model-View-Controller)**. Aplikasi ini digunakan petugas perpustakaan
+untuk login dan mengelola data buku. Antarmuka dibangun dengan
+**CustomTkinter**, data disimpan di **MySQL**, dan kualitas kode dijaga
+melalui **CI/CD dengan GitHub Actions**.
+
+## Struktur Direktori
+
+```
+Modul3.RPL/
+├── .github/
+│   └── workflows/
+│       └── ci_pipeline.yml   # Konfigurasi CI (flake8 + pytest)
+├── config/                   # Konfigurasi koneksi database
+├── models/                   # Model: logika data & akses database
+├── views/                    # View: tampilan antarmuka (CustomTkinter)
+├── controllers/              # Controller: penghubung model dan view
+├── tests/                    # Unit test (pytest)
+│   ├── test_auth.py
+│   └── test_buku.py
+├── MODULNYA/                 # Berkas modul praktikum
+├── buat_akun.py              # Skrip pembuatan akun pengguna
+├── cek_password.py           # Skrip pengecekan password
+├── main.py                   # Titik masuk aplikasi
+├── requirements.txt          # Daftar dependensi
+└── README.md
+```
+
+## Panduan Instalasi & Konfigurasi Database MySQL
+
+### 1. Prasyarat
+- Python 3.11 atau lebih baru
+- Git
+- Laragon (untuk MySQL)
+
+### 2. Clone repositori
+```
+git clone https://github.com/suryasaputraaa/Modul3.RPL.git
+cd Modul3.RPL
+```
+
+### 3. Buat dan aktifkan virtual environment
+```
+python -m venv env
+./env/Scripts/activate
+```
+
+### 4. Instal dependensi
+```
+pip install -r requirements.txt
+```
+
+### 5. Siapkan database MySQL
+1. Buka **Laragon**, klik **Start All** hingga MySQL menyala.
+2. Buka **HeidiSQL** (klik kanan Laragon > MySQL > HeidiSQL).
+3. Buat database baru bernama `db_perpustakaan`:
+   ```sql
+   CREATE DATABASE db_perpustakaan;
+   ```
+4. Buat tabel yang dibutuhkan aplikasi (data pengguna dan data buku) atau
+   impor berkas `.sql` yang tersedia.
+
+### 6. Sesuaikan konfigurasi koneksi
+Buka berkas koneksi database di folder `config/` dan pastikan nilainya
+sesuai dengan MySQL di Laragon:
+
+```python
+self.host = "localhost"
+self.db_name = "db_perpustakaan"
+self.username = "root"
+self.password = ""
+```
+
+## Cara Menjalankan Aplikasi
+
+**Dari kode sumber:**
+```
+python main.py
+```
+
+**Dari berkas .exe:**
+Unduh `AplikasiPerpustakaan.exe` dari halaman
+[Releases](https://github.com/suryasaputraaa/Modul3.RPL/releases),
+pastikan MySQL di Laragon sudah menyala, lalu klik dua kali berkas tersebut.
+
+**Menjalankan unit test:**
+```
+pytest -v
+```
+
+**Membuat ulang berkas .exe:**
+```
+pip install pyinstaller
+pyinstaller --noconfirm --onefile --windowed --name "AplikasiPerpustakaan" main.py
+```
+Hasilnya ada di folder `dist/`.
+
+## CI/CD
+
+Setiap `push` atau `pull request` ke branch `main` akan menjalankan
+pipeline GitHub Actions secara otomatis:
+1. Checkout kode
+2. Menyiapkan Python 3.11
+3. Instal dependensi
+4. Pengecekan kualitas kode dengan **flake8**
+5. Unit testing dengan **pytest**
