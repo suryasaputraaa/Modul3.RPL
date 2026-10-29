@@ -7,10 +7,9 @@ class BukuView(ctk.CTk):
         super().__init__()
 
         self.title("Sistem Manajemen Perpustakaan")
-        self.geometry("800x450")
+        self.geometry("800x500")
 
-        # Konfigurasi Grid Utama
-        # 1 baris, 2 kolom
+        # Konfigurasi grid utama
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=2)
         self.grid_rowconfigure(0, weight=1)
@@ -34,10 +33,7 @@ class BukuView(ctk.CTk):
             font=("Arial", 16, "bold")
         ).pack(pady=15)
 
-        # ==========================================
-        # KOMPONEN INPUT
-        # ==========================================
-
+        # Input judul
         self.entry_judul = ctk.CTkEntry(
             self.frame_kiri,
             placeholder_text="Masukkan Judul Buku"
@@ -48,6 +44,7 @@ class BukuView(ctk.CTk):
             fill="x"
         )
 
+        # Input penulis
         self.entry_penulis = ctk.CTkEntry(
             self.frame_kiri,
             placeholder_text="Masukkan Nama Penulis"
@@ -58,6 +55,7 @@ class BukuView(ctk.CTk):
             fill="x"
         )
 
+        # Input tahun terbit
         self.entry_tahun = ctk.CTkEntry(
             self.frame_kiri,
             placeholder_text="Tahun Terbit (Misal: 2024)"
@@ -69,10 +67,9 @@ class BukuView(ctk.CTk):
         )
 
         # ==========================================
-        # TOMBOL AKSI
+        # TOMBOL AKSI BUKU
         # ==========================================
 
-        # Tombol Simpan Data
         self.btn_simpan = ctk.CTkButton(
             self.frame_kiri,
             text="Simpan Data",
@@ -84,7 +81,6 @@ class BukuView(ctk.CTk):
             fill="x"
         )
 
-        # Tombol Perbarui Data
         self.btn_update = ctk.CTkButton(
             self.frame_kiri,
             text="Perbarui Data (Update)",
@@ -96,7 +92,6 @@ class BukuView(ctk.CTk):
             fill="x"
         )
 
-        # Tombol Hapus Data
         self.btn_delete = ctk.CTkButton(
             self.frame_kiri,
             text="Hapus Data (Delete)",
@@ -104,6 +99,19 @@ class BukuView(ctk.CTk):
         )
         self.btn_delete.pack(
             pady=8,
+            padx=15,
+            fill="x"
+        )
+
+        # Tombol Logout
+        self.btn_logout = ctk.CTkButton(
+            self.frame_kiri,
+            text="Logout",
+            fg_color="gray",
+            hover_color="#555555"
+        )
+        self.btn_logout.pack(
+            pady=(20, 10),
             padx=15,
             fill="x"
         )
@@ -127,10 +135,7 @@ class BukuView(ctk.CTk):
             font=("Arial", 16, "bold")
         ).pack(pady=15)
 
-        # ==========================================
-        # KOMPONEN TABEL
-        # ==========================================
-
+        # Kolom tabel
         kolom = (
             "id",
             "judul",
@@ -145,57 +150,26 @@ class BukuView(ctk.CTk):
             height=15
         )
 
-        # ==========================================
-        # HEADER TABEL
-        # ==========================================
+        # Header tabel
+        self.tabel.heading("id", text="ID")
+        self.tabel.heading("judul", text="Judul Buku")
+        self.tabel.heading("penulis", text="Penulis")
+        self.tabel.heading("tahun", text="Tahun")
 
-        self.tabel.heading(
-            "id",
-            text="ID"
-        )
-
-        self.tabel.heading(
-            "judul",
-            text="Judul Buku"
-        )
-
-        self.tabel.heading(
-            "penulis",
-            text="Penulis"
-        )
-
-        self.tabel.heading(
-            "tahun",
-            text="Tahun"
-        )
-
-        # ==========================================
-        # LEBAR KOLOM TABEL
-        # ==========================================
-
+        # Lebar kolom
         self.tabel.column(
             "id",
             width=40,
             anchor="center"
         )
-
-        self.tabel.column(
-            "judul",
-            width=150
-        )
-
-        self.tabel.column(
-            "penulis",
-            width=120
-        )
-
+        self.tabel.column("judul", width=150)
+        self.tabel.column("penulis", width=120)
         self.tabel.column(
             "tahun",
             width=80,
             anchor="center"
         )
 
-        # Menampilkan tabel
         self.tabel.pack(
             fill="both",
             expand=True,
@@ -203,10 +177,6 @@ class BukuView(ctk.CTk):
             pady=10
         )
 
-
-# ==========================================
-# BLOK EKSEKUSI
-# ==========================================
 
 if __name__ == "__main__":
     app = BukuView()
